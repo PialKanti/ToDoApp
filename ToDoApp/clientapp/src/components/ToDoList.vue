@@ -23,7 +23,7 @@ export default{
     },
     methods:{
         async fetchTodoList(){
-            const response = await fetch('https://localhost:5002/api/todo');
+            const response = await fetch('api/todo');
             const data = await response.json();
             return data;
         }
