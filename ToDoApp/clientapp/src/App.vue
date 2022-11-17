@@ -1,0 +1,30 @@
+<template>
+  <div class="container">
+    <AppHeader title="ToDo App"/>
+    <ToDoList/>
+  </div>
+</template>
+
+<script>
+    import AppHeader from './components/AppHeader.vue'
+    import ToDoList from './components/ToDoList.vue'
+
+export default {
+  name: 'App',
+  components: {
+    AppHeader,
+    ToDoList
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
