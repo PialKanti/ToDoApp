@@ -1,72 +1,63 @@
-﻿using ToDoApp.Models;
+﻿using ToDoApp.Entities;
 
 namespace ToDoApp.Repositories
 {
     public class ToDoRepository : IToDoRepository
     {
-        private bool _disposed = false;
+        private bool _disposedValue;
+
+        public ToDoItem Create(ToDoItem entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ToDoItem Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ToDoItem> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ToDoItem Update(ToDoItem entity)
+        {
+            throw new NotImplementedException();
+        }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this._disposed)
+            if (!_disposedValue)
             {
                 if (disposing)
                 {
-                    //context.Dispose();
+                    // TODO: dispose managed state (managed objects)
                 }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
+                // TODO: set large fields to null
+                _disposedValue = true;
             }
-            this._disposed = true;
         }
+
+        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+        // ~ToDoRepository()
+        // {
+        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        //     Dispose(disposing: false);
+        // }
 
         public void Dispose()
         {
-            Dispose(true);
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+            Dispose(disposing: true);
             GC.SuppressFinalize(this);
-        }
-
-        public IEnumerable<ToDoItem> GetToDoItems()
-        {
-            List<ToDoItem> items = new List<ToDoItem>();
-            items.Add(new ToDoItem
-            {
-                Id = 1,
-                Name = "Going to Dentist", 
-                CreatedDate = new DateTime(2022, 11, 15)
-            });
-            items.Add(new ToDoItem
-            {
-                Id = 2,
-                Name = "Watching football match",
-                CreatedDate = new DateTime(2022, 11, 10)
-            });
-            items.Add(new ToDoItem
-            {
-                Id = 3,
-                Name = "Meeting with boss",
-                CreatedDate = new DateTime(2022, 11, 5)
-            });
-
-            return items;
-        }
-
-        public ToDoItem GetToDoItemById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Insert(ToDoItem item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(ToDoItem item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Delete(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ToDoApp.Models;
+using ToDoApp.Entities;
 using ToDoApp.Repositories;
 
 namespace ToDoApp.Controllers
@@ -18,7 +18,7 @@ namespace ToDoApp.Controllers
         [HttpGet]
         public IEnumerable<ToDoItem> Get()
         {
-            return _repository.GetToDoItems();
+            return new List<ToDoItem>();
         }
     }
 }

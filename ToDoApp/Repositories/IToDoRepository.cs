@@ -1,13 +1,8 @@
-﻿using ToDoApp.Models;
+﻿using ToDoApp.Entities;
 
 namespace ToDoApp.Repositories
 {
-    public interface IToDoRepository : IDisposable
+    public interface IToDoRepository : IRepository<ToDoItem>
     {
-        IEnumerable<ToDoItem> GetToDoItems();
-        ToDoItem GetToDoItemById(int id);
-        bool Insert(ToDoItem item);
-        bool Update(ToDoItem item);
-        int Delete(int id);
     }
 }
