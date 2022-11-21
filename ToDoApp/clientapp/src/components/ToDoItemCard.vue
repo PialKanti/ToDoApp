@@ -22,7 +22,7 @@
           </button>
         </div>
         <div class="col-md-4">
-          <button type="button" class="btn btn-light">
+          <button type="button" class="btn btn-light" data-toggle="modal" data-target="#ToDoModalUpdateForm">
             <font-awesome-icon icon="fa-regular fa-pen-to-square" />
             Update
           </button>
@@ -34,13 +34,19 @@
           </button>
         </div>
       </div>
+      <ToDoModalForm Title="Update event" Id="ToDoModalUpdateForm" :TodoItem="todoItem"></ToDoModalForm>
     </div>
   </div>
 </template>
 
 <script>
+import ToDoModalForm from './ToDoModalForm.vue';
+
 export default {
   name: "ToDoItemCard",
+  components: {
+    ToDoModalForm
+  },
   props: {
     todoItem: Object,
   },

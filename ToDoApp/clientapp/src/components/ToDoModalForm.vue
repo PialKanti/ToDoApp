@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" id="ToDoModalForm" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    <div class="modal fade" :id="Id" data-backdrop="static" data-keyboard="false" tabindex="-1"
         aria-labelledby="ToDoModalFormLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -13,7 +13,8 @@
                     <form>
                         <div class="form-group">
                             <label class="control-label" for="FormInputName">Name</label>
-                            <input type="text" class="form-control" id="FormInputName" placeholder="Enter event name" />
+                            <input type="text" class="form-control" id="FormInputName" placeholder="Enter event name"
+                                v-model="name" />
                         </div>
                         <div class="form-group">
                             <label for="FormInputDescription">Description</label>
@@ -34,11 +35,28 @@
 </template>
 
 <script>
+
 export default {
     name: 'ToDoModalForm',
     props: {
         Title: String,
+        Id: String,
         TodoItem: Object
+    },
+    data() {
+        return {
+            name: '',
+            description: '',
+            place: ''
+        };
+    },
+    created() {
+        if (this.TodoItem) {
+            this.name = this.TodoItem.name;
+            this.description = this.TodoItem.description;
+            this.place = this.TodoItem.place;
+            console.log(this.Title);
+        }
     },
 }
 </script>
