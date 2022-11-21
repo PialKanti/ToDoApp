@@ -2,10 +2,10 @@
 {
     public interface IRepository<T> : IDisposable
     {
-        T Get(int id);
-        T Create(T entity);
-        T Update(T entity);
-        bool Delete(int id);
-        IEnumerable<T> GetAll();
+        Task<T> Get(int id);
+        Task<T> Insert(T entity);
+        void Update(T entityToUpdate);
+        Task<int> Delete(int id);
+        Task<IEnumerable<T>> GetAll();
     }
 }

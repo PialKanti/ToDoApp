@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ToDoApp.Data;
 using ToDoApp.Entities;
 using ToDoApp.Repositories;
 
@@ -10,9 +11,9 @@ namespace ToDoApp.Controllers
     {
         private readonly IToDoRepository _repository;
 
-        public ToDoController()
+        public ToDoController(ToDoContext dbContext)
         {
-            _repository = new ToDoRepository();
+            _repository = new ToDoRepository(dbContext);
         }
 
         [HttpGet]

@@ -1,62 +1,74 @@
-﻿using ToDoApp.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using ToDoApp.Data;
+using ToDoApp.Entities;
 
 namespace ToDoApp.Repositories
 {
     public class ToDoRepository : IToDoRepository
     {
-        private bool _disposedValue;
+        private bool _disposed;
+        private readonly ToDoContext _dbContext;
 
-        public ToDoItem Create(ToDoItem entity)
+        public ToDoRepository(ToDoContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public bool Delete(int id)
+        public async Task<ToDoItem> Insert(ToDoItem entity)
         {
-            throw new NotImplementedException();
+            var valueTask = await _dbContext.ToDoItems.AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
+            return valueTask.Entity;
         }
 
-        public ToDoItem Get(int id)
+        public async void Update(ToDoItem entityToUpdate)
         {
-            throw new NotImplementedException();
+            _dbContext.ToDoItems.Attach(entityToUpdate);
+            _dbContext.Entry(entityToUpdate).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
         }
 
-        public IEnumerable<ToDoItem> GetAll()
+        public async Task<int> Delete(int id)
         {
-            throw new NotImplementedException();
+            Delete(await Get(id));
+            return await _dbContext.SaveChangesAsync();
         }
 
-        public ToDoItem Update(ToDoItem entity)
+        private void Delete(ToDoItem entityToDelete)
         {
-            throw new NotImplementedException();
+            if (_dbContext.Entry(entityToDelete).State == EntityState.Detached)
+            {
+                _dbContext.ToDoItems.Attach(entityToDelete);
+            }
+
+            _dbContext.ToDoItems.Remove(entityToDelete);
+        }
+
+        public async Task<ToDoItem> Get(int id)
+        {
+            return await _dbContext.ToDoItems.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<ToDoItem>> GetAll()
+        {
+            return await _dbContext.ToDoItems.ToListAsync();
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposedValue)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects)
+                    _dbContext.Dispose();
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override finalizer
-                // TODO: set large fields to null
-                _disposedValue = true;
             }
+            this._disposed = true;
         }
-
-        // // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
-        // ~ToDoRepository()
-        // {
-        //     // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-        //     Dispose(disposing: false);
-        // }
 
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-            Dispose(disposing: true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
     }
