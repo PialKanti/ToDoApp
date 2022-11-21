@@ -17,9 +17,9 @@ namespace ToDoApp.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ToDoItem> Get()
+        public async Task<IEnumerable<ToDoItem>> Get()
         {
-            return new List<ToDoItem>();
+            return await _repository.GetAll();
         }
     }
 }
