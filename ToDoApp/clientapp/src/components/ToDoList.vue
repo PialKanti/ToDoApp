@@ -1,32 +1,36 @@
 <template>
-    <div class="card-columns">
-        <ToDoItemCard v-for="(item, index) in toDoItems" :key="index" :todoItem="item"/>
-    </div>
+  <div class="card-columns mt-5">
+    <ToDoItemCard
+      v-for="(item, index) in toDoItems"
+      :key="index"
+      :todoItem="item"
+    />
+  </div>
 </template>
 
 <script>
-import ToDoItemCard from './ToDoItemCard.vue'
+import ToDoItemCard from "./ToDoItemCard.vue";
 
-export default{
-    name : 'ToDoList',
-    components:{
-        ToDoItemCard
+export default {
+  name: "ToDoList",
+  components: {
+    ToDoItemCard,
+  },
+  data() {
+    return {
+      toDoItems: [],
+    };
+  },
+  async created() {
+    this.toDoItems = await this.fetchTodoList();
+    console.log(this.toDoItems);
+  },
+  methods: {
+    async fetchTodoList() {
+      const response = await fetch("api/todo");
+      const data = await response.json();
+      return data;
     },
-    data(){
-        return{
-            toDoItems : []
-        }
-    },
-    async created(){
-        this.toDoItems = await this.fetchTodoList();
-        console.log(this.toDoItems);
-    },
-    methods:{
-        async fetchTodoList(){
-            const response = await fetch('api/todo');
-            const data = await response.json();
-            return data;
-        }
-    }
-}
+  },
+};
 </script>

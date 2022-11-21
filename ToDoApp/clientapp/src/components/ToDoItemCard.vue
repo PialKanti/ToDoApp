@@ -62,16 +62,28 @@ export default {
       ];
 
       var date = new Date(dateTime);
+      const day = date.getDate();
+      const month = monthNames[date.getMonth()];
+      const year = date.getFullYear();
+
+      let hours = date.getHours() % 12;
+      if (hours == 0) {
+        hours = 12;
+      }
+      const minutes = date.getMinutes();
+      const am_pm = date.getHours() > 12 ? "PM" : "AM";
       return (
-        date.getDate() +
+        day +
         " " +
-        monthNames[date.getMonth()] +
+        month +
         ", " +
-        date.getFullYear() +
+        year +
         " " +
-        date.getHours() +
+        hours +
         ":" +
-        date.getMinutes()
+        minutes +
+        " " +
+        am_pm
       );
     },
   },
