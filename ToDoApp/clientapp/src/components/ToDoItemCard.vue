@@ -28,7 +28,7 @@
           </button>
         </div>
         <div class="col-md-4">
-          <button type="button" class="btn btn-light">
+          <button type="button" class="btn btn-light" @click="onDeleteButtonClicked">
             <font-awesome-icon icon="fa-regular fa-trash-can" />
             Delete
           </button>
@@ -102,6 +102,13 @@ export default {
         am_pm
       );
     },
+    async onDeleteButtonClicked() {
+      const url = 'api/todo/' + this.todoItem.id;
+      await fetch(url, {
+        method: 'DELETE'
+      });
+      this.$emit('refresh-list');
+    }
   },
 };
 </script>

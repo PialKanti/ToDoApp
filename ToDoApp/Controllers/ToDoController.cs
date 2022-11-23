@@ -23,9 +23,15 @@ namespace ToDoApp.Controllers
         }
 
         [HttpPost]
-        public async Task Get(ToDoItem item)
+        public async Task Create(ToDoItem item)
         {
             await _repository.Insert(item);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await _repository.Delete(id);
         }
     }
 }

@@ -5,7 +5,7 @@
   </button>
   <ToDoModalForm Title="Create event" Id="ToDoModalCreateForm" SubmitButtonText="Create"></ToDoModalForm>
   <div class="card-columns mt-5">
-    <ToDoItemCard v-for="(item, index) in toDoItems" :key="index" :todoItem="item" />
+    <ToDoItemCard v-for="(item, index) in toDoItems" :key="index" :todoItem="item" @refresh-list="onRefreshList" />
   </div>
 </template>
 
@@ -25,7 +25,7 @@ export default {
     };
   },
   async created() {
-    this.toDoItems = await this.fetchTodoList();
+    this.onRefreshList();
   },
   methods: {
     async fetchTodoList() {
@@ -33,6 +33,11 @@ export default {
       const data = await response.json();
       return data;
     },
+    async onRefreshList() {
+      console.log("Refreshing List");
+      this.toDoItems = await this.fetchTodoList();
+      console.log(this.toDoItems);
+    }
   },
 };
 </script>
