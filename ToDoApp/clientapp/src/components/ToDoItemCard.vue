@@ -22,7 +22,7 @@
           </button>
         </div>
         <div class="col-md-4">
-          <button type="button" class="btn btn-light" data-toggle="modal" data-target="#ToDoModalUpdateForm">
+          <button type="button" class="btn btn-light" data-toggle="modal" :data-target="dataTarget">
             <font-awesome-icon icon="fa-regular fa-pen-to-square" />
             Update
           </button>
@@ -34,7 +34,7 @@
           </button>
         </div>
       </div>
-      <ToDoModalForm Title="Update event" Id="ToDoModalUpdateForm" :TodoItem="todoItem"></ToDoModalForm>
+      <ToDoModalForm Title="Update event" :Id="modalId" :TodoItem="todoItem"></ToDoModalForm>
     </div>
   </div>
 </template>
@@ -47,8 +47,18 @@ export default {
   components: {
     ToDoModalForm
   },
+  data() {
+    return {
+      dataTarget: '',
+      modalId: ''
+    };
+  },
   props: {
     todoItem: Object,
+  },
+  created() {
+    this.modalId = "ToDoModalUpdateForm" + this.todoItem.id;
+    this.dataTarget = "#" + this.modalId;
   },
   methods: {
     getFormattedDateTime(dateTime) {

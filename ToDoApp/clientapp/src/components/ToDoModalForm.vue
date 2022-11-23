@@ -19,12 +19,17 @@
                         <div class="form-group">
                             <label for="FormInputDescription">Description</label>
                             <textarea class="form-control" id="FormInputDescription" rows="3"
-                                placeholder="Enter event description"></textarea>
+                                placeholder="Enter event description" v-model="description"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="FormInputPlace">Place</label>
-                            <input type="text" class="form-control" id="FormInputPlace"
-                                placeholder="Enter event place" />
+                            <input type="text" class="form-control" id="FormInputPlace" placeholder="Enter event place"
+                                v-model="place" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="FormInputExpiryDate">Remind me at</label>
+                            <input type="text" class="form-control" id="FormInputExpiryDate"
+                                placeholder="Enter remind date and time" v-model="expiryDateTime" />
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -47,15 +52,21 @@ export default {
         return {
             name: '',
             description: '',
-            place: ''
+            place: '',
+            expiryDateTime: new Date()
         };
     },
+    mounted() {
+        console.log("Mounted" + this.TodoItem);
+    },
     created() {
+
         if (this.TodoItem) {
             this.name = this.TodoItem.name;
             this.description = this.TodoItem.description;
             this.place = this.TodoItem.place;
-            console.log(this.Title);
+            this.expiryDateTime = new Date(this.TodoItem.expiryDateTime);
+            console.log(this.TodoItem.expiryDateTime);
         }
     },
 }
