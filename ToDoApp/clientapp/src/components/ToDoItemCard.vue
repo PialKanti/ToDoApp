@@ -34,7 +34,7 @@
           </button>
         </div>
       </div>
-      <ToDoModalForm Title="Update event" :Id="modalId" :TodoItem="todoItem"></ToDoModalForm>
+      <ToDoModalForm Title="Update event" :Id="modalId" :TodoItem="todoItem" SubmitButtonText="Update"></ToDoModalForm>
     </div>
   </div>
 </template>

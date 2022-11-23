@@ -31,7 +31,7 @@
                             <input type="text" class="form-control" id="FormInputExpiryDate"
                                 placeholder="Enter remind date and time" v-model="expiryDateTime" />
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ SubmitButtonText }}</button>
                     </form>
                 </div>
             </div>
@@ -46,18 +46,16 @@ export default {
     props: {
         Title: String,
         Id: String,
-        TodoItem: Object
+        TodoItem: Object,
+        SubmitButtonText: String
     },
     data() {
         return {
             name: '',
             description: '',
             place: '',
-            expiryDateTime: new Date()
+            expiryDateTime: ''
         };
-    },
-    mounted() {
-        console.log("Mounted" + this.TodoItem);
     },
     created() {
 

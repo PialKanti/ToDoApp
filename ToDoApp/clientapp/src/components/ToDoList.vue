@@ -3,7 +3,7 @@
     <font-awesome-icon icon="fa-regular fa-square-plus" />
     Create event
   </button>
-  <ToDoModalForm Title="Create event" Id="ToDoModalCreateForm"></ToDoModalForm>
+  <ToDoModalForm Title="Create event" Id="ToDoModalCreateForm" SubmitButtonText="Create"></ToDoModalForm>
   <div class="card-columns mt-5">
     <ToDoItemCard v-for="(item, index) in toDoItems" :key="index" :todoItem="item" />
   </div>
