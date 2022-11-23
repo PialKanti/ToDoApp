@@ -26,7 +26,6 @@ export default {
   },
   async created() {
     this.toDoItems = await this.fetchTodoList();
-    console.log(this.toDoItems);
   },
   methods: {
     async fetchTodoList() {

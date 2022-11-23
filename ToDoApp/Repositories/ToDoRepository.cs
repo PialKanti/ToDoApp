@@ -6,7 +6,6 @@ namespace ToDoApp.Repositories
 {
     public class ToDoRepository : IToDoRepository
     {
-        private bool _disposed;
         private readonly ToDoContext _dbContext;
 
         public ToDoRepository(ToDoContext dbContext)
@@ -16,7 +15,7 @@ namespace ToDoApp.Repositories
 
         public async Task<ToDoItem> Insert(ToDoItem entity)
         {
-            var valueTask = await _dbContext.ToDoItems.AddAsync(entity);
+            var valueTask = _dbContext.ToDoItems.Add(entity);
             await _dbContext.SaveChangesAsync();
             return valueTask.Entity;
         }
@@ -52,24 +51,6 @@ namespace ToDoApp.Repositories
         public async Task<IEnumerable<ToDoItem>> GetAll()
         {
             return await _dbContext.ToDoItems.ToListAsync();
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this._disposed)
-            {
-                if (disposing)
-                {
-                    _dbContext.Dispose();
-                }
-            }
-            this._disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

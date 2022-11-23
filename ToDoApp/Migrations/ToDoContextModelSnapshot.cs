@@ -50,7 +50,7 @@ namespace ToDoApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ToDoItems");
+                    b.ToTable("ToDoItems", (string)null);
 
                     b.HasData(
                         new

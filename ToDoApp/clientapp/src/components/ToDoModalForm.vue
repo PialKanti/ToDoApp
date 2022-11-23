@@ -10,7 +10,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form @submit.prevent="submitForm">
                         <div class="form-group">
                             <label class="control-label" for="FormInputName">Name</label>
                             <input type="text" class="form-control" id="FormInputName" placeholder="Enter event name"
@@ -58,14 +58,33 @@ export default {
         };
     },
     created() {
-
         if (this.TodoItem) {
             this.name = this.TodoItem.name;
             this.description = this.TodoItem.description;
             this.place = this.TodoItem.place;
             this.expiryDateTime = new Date(this.TodoItem.expiryDateTime);
-            console.log(this.TodoItem.expiryDateTime);
         }
     },
+    methods: {
+        async submitForm() {
+            var todoItem = JSON.stringify({
+                name: this.name,
+                description: this.description,
+                place: this.place,
+                createdDateTime: new Date(),
+                expiryDateTime: new Date(this.expiryDateTime)
+            });
+
+            await fetch('api/todo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', 'charset': 'utf-8'
+                },
+                body: todoItem
+            }).then((response) => {
+                console.log(response);
+            });
+        }
+    }
 }
 </script>

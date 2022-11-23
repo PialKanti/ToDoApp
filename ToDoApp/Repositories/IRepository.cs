@@ -1,6 +1,6 @@
 ﻿namespace ToDoApp.Repositories
 {
-    public interface IRepository<T> : IDisposable
+    public interface IRepository<T>
     {
         Task<T> Get(int id);
         Task<T> Insert(T entity);

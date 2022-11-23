@@ -21,5 +21,11 @@ namespace ToDoApp.Controllers
         {
             return await _repository.GetAll();
         }
+
+        [HttpPost]
+        public async Task Get(ToDoItem item)
+        {
+            await _repository.Insert(item);
+        }
     }
 }
