@@ -31,7 +31,9 @@
                             <input type="text" class="form-control" id="FormInputExpiryDate"
                                 placeholder="Enter remind date and time" v-model="expiryDateTime" />
                         </div>
-                        <button type="submit" class="btn btn-primary">{{ SubmitButtonText }}</button>
+                        <button type="submit" class="btn btn-primary">{{
+                                SubmitButtonText
+                        }}</button>
                     </form>
                 </div>
             </div>
@@ -67,6 +69,7 @@ export default {
     },
     methods: {
         async submitForm() {
+            console.log("submit form");
             var todoItem = JSON.stringify({
                 name: this.name,
                 description: this.description,
@@ -81,9 +84,9 @@ export default {
                     'Content-Type': 'application/json', 'charset': 'utf-8'
                 },
                 body: todoItem
-            }).then((response) => {
-                console.log(response);
             });
+
+            this.$emit('form-submission');
         }
     }
 }

@@ -3,7 +3,8 @@
     <font-awesome-icon icon="fa-regular fa-square-plus" />
     Create event
   </button>
-  <ToDoModalForm Title="Create event" Id="ToDoModalCreateForm" SubmitButtonText="Create"></ToDoModalForm>
+  <ToDoModalForm Title="Create event" Id="ToDoModalCreateForm" SubmitButtonText="Create"
+    @form-submission="onFormSubmission"></ToDoModalForm>
   <div class="card-columns mt-5">
     <ToDoItemCard v-for="(item, index) in toDoItems" :key="index" :todoItem="item" @refresh-list="onRefreshList" />
   </div>
@@ -37,6 +38,9 @@ export default {
       console.log("Refreshing List");
       this.toDoItems = await this.fetchTodoList();
       console.log(this.toDoItems);
+    },
+    onFormSubmission() {
+      this.onRefreshList();
     }
   },
 };
