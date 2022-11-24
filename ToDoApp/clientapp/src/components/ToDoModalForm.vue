@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="FormInputExpiryDate">Remind me at</label>
-                            <input type="text" class="form-control" id="FormInputExpiryDate"
+                            <input type="datetime-local" class="form-control" id="FormInputExpiryDate"
                                 placeholder="Enter remind date and time" v-model="expiryDateTime" />
                         </div>
                         <button type="submit" class="btn btn-primary">{{
@@ -68,11 +68,12 @@ export default {
             this.name = this.TodoItem.name;
             this.description = this.TodoItem.description;
             this.place = this.TodoItem.place;
-            this.expiryDateTime = new Date(this.TodoItem.expiryDateTime);
+            this.expiryDateTime = this.toIsoString(this.TodoItem.expiryDateTime);
         }
     },
     methods: {
         async submitForm() {
+            console.log(this.expiryDateTime);
             var data;
             if (this.SubmitButtonText == 'Create') {
                 data = JSON.stringify({
@@ -117,6 +118,17 @@ export default {
         },
         closeModal() {
             document.getElementById(this.closeButtonId).click();
+        },
+        toIsoString(str) {
+            var date = new Date(str);
+            return date.getFullYear() +
+                '-' + this.pad(date.getMonth() + 1) +
+                '-' + this.pad(date.getDate()) +
+                'T' + this.pad(date.getHours()) +
+                ':' + this.pad(date.getMinutes());
+        },
+        pad(num) {
+            return (num < 10 ? '0' : '') + num;
         }
     }
 }

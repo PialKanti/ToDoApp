@@ -96,7 +96,7 @@ export default {
         hours = 12;
       }
       const minutes = (date.getMinutes() == 0) ? "00" : date.getMinutes();
-      const am_pm = date.getHours() > 12 ? "PM" : "AM";
+      const am_pm = date.getHours() >= 12 ? "PM" : "AM";
       return (hours + ":" + minutes + " " + am_pm);
     },
     async onDeleteButtonClicked() {
