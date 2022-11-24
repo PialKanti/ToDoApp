@@ -1,6 +1,6 @@
 <template>
   {{ ToDoItem }}
-  <div class="card" style="width: 22rem">
+  <div class="card">
     <div class="card-header">
       <h5>{{ todoItem.name }}</h5>
     </div>
@@ -115,5 +115,7 @@ export default {
 </script>
 
 <style scoped>
-
+.card {
+  min-width: 20rem;
+}
 </style>
