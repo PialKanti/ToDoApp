@@ -5,9 +5,13 @@
       <h5>{{ todoItem.name }}</h5>
     </div>
     <div class="card-body">
-      <h6 class="card-subtitle mb-2 text-muted">
+      <h6 class="card-subtitle mb-3 text-muted">
         <font-awesome-icon icon="fa-regular fa-calendar-days" />
-        {{ getFormattedDateTime(todoItem.expiryDateTime) }}
+        {{ getFormattedDate(todoItem.expiryDateTime) }}
+      </h6>
+      <h6 class="mb-3 text-muted">
+        <font-awesome-icon icon="fa-regular fa-clock" />
+        {{ getFormattedTime(todoItem.expiryDateTime) }}
       </h6>
       <p class="card-text">{{ todoItem.description }}</p>
       <p>
@@ -62,7 +66,7 @@ export default {
     this.dataTarget = "#" + this.modalId;
   },
   methods: {
-    getFormattedDateTime(dateTime) {
+    getFormattedDate(dateTime) {
       const monthNames = [
         "January",
         "February",
@@ -83,25 +87,17 @@ export default {
       const month = monthNames[date.getMonth()];
       const year = date.getFullYear();
 
+      return (day + " " + month + ", " + year);
+    },
+    getFormattedTime(dateTime) {
+      var date = new Date(dateTime);
       let hours = date.getHours() % 12;
       if (hours == 0) {
         hours = 12;
       }
-      const minutes = date.getMinutes();
+      const minutes = (date.getMinutes() == 0) ? "00" : date.getMinutes();
       const am_pm = date.getHours() > 12 ? "PM" : "AM";
-      return (
-        day +
-        " " +
-        month +
-        ", " +
-        year +
-        " " +
-        hours +
-        ":" +
-        minutes +
-        " " +
-        am_pm
-      );
+      return (hours + ":" + minutes + " " + am_pm);
     },
     async onDeleteButtonClicked() {
       const url = 'api/todo/' + this.todoItem.id;

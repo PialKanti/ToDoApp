@@ -10,10 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
-import {faCalendarDays, faCheckCircle, faPenToSquare, faTrashCan, faPlusSquare} from '@fortawesome/free-regular-svg-icons'
+import {faCalendarDays, faCheckCircle, faPenToSquare, faTrashCan, faPlusSquare, faClock} from '@fortawesome/free-regular-svg-icons'
 
 /* add icons to the library */
-library.add(faLocationDot, faCalendarDays, faCheckCircle, faPenToSquare, faTrashCan, faPlusSquare)
+library.add(faLocationDot, faCalendarDays, faCheckCircle, faPenToSquare, faTrashCan, faPlusSquare, faClock)
 
 createApp(App)
 .component('font-awesome-icon', FontAwesomeIcon)
