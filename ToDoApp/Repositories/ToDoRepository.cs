@@ -20,7 +20,7 @@ namespace ToDoApp.Repositories
             return valueTask.Entity;
         }
 
-        public async void Update(ToDoItem entityToUpdate)
+        public async Task Update(ToDoItem entityToUpdate)
         {
             _dbContext.ToDoItems.Attach(entityToUpdate);
             _dbContext.Entry(entityToUpdate).State = EntityState.Modified;

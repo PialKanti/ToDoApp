@@ -28,6 +28,19 @@ namespace ToDoApp.Controllers
             await _repository.Insert(item);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, ToDoItem item)
+        {
+            if (id != item.Id)
+            {
+                return BadRequest();
+            }
+
+            await _repository.Update(item);
+
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {

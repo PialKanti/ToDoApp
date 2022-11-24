@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ToDoModalFormLabel">{{ Title }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" :id="closeButtonId">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -56,8 +56,12 @@ export default {
             name: '',
             description: '',
             place: '',
-            expiryDateTime: ''
+            expiryDateTime: '',
+            closeButtonId: ''
         };
+    },
+    beforeMount() {
+        this.closeButtonId = 'close' + this.Id;
     },
     created() {
         if (this.TodoItem) {
@@ -69,24 +73,50 @@ export default {
     },
     methods: {
         async submitForm() {
-            console.log("submit form");
-            var todoItem = JSON.stringify({
-                name: this.name,
-                description: this.description,
-                place: this.place,
-                createdDateTime: new Date(),
-                expiryDateTime: new Date(this.expiryDateTime)
-            });
+            var data;
+            if (this.SubmitButtonText == 'Create') {
+                data = JSON.stringify({
+                    name: this.name,
+                    description: this.description,
+                    place: this.place,
+                    createdDateTime: new Date(),
+                    expiryDateTime: new Date(this.expiryDateTime)
+                });
 
-            await fetch('api/todo', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json', 'charset': 'utf-8'
-                },
-                body: todoItem
-            });
+                await fetch('api/todo', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json', 'charset': 'utf-8'
+                    },
+                    body: data
+                });
+            }
+            else {
+                data = JSON.stringify({
+                    id: this.TodoItem.id,
+                    name: this.name,
+                    description: this.description,
+                    place: this.place,
+                    createdDateTime: new Date(),
+                    expiryDateTime: new Date(this.expiryDateTime)
+                });
+
+                const requestUrl = 'api/todo/' + this.TodoItem.id;
+                console.log(requestUrl);
+                await fetch(requestUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json', 'charset': 'utf-8'
+                    },
+                    body: data
+                });
+            }
 
             this.$emit('form-submission');
+            this.closeModal();
+        },
+        closeModal() {
+            document.getElementById(this.closeButtonId).click();
         }
     }
 }

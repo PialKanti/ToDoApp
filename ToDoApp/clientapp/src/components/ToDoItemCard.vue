@@ -34,7 +34,8 @@
           </button>
         </div>
       </div>
-      <ToDoModalForm Title="Update event" :Id="modalId" :TodoItem="todoItem" SubmitButtonText="Update"></ToDoModalForm>
+      <ToDoModalForm Title="Update event" :Id="modalId" :TodoItem="todoItem" SubmitButtonText="Update"
+        @form-submission="$emit('refresh-list')"></ToDoModalForm>
     </div>
   </div>
 </template>
