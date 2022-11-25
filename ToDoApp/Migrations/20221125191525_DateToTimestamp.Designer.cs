@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoApp.Data;
 
@@ -10,9 +11,11 @@ using ToDoApp.Data;
 namespace ToDoApp.Migrations
 {
     [DbContext(typeof(ToDoContext))]
-    partial class ToDoContextModelSnapshot : ModelSnapshot
+    [Migration("20221125191525_DateToTimestamp")]
+    partial class DateToTimestamp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,15 +32,15 @@ namespace ToDoApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("CreatedTimestamp")
-                        .HasColumnType("bigint");
+                    b.Property<int>("CreatedTimestamp")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ExpiryTimestamp")
-                        .HasColumnType("bigint");
+                    b.Property<int>("ExpiryTimestamp")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -55,27 +58,27 @@ namespace ToDoApp.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedTimestamp = 1669406826L,
+                            CreatedTimestamp = 1669403725,
                             Description = "This is Task 1.",
-                            ExpiryTimestamp = 1669104000L,
+                            ExpiryTimestamp = 1669104000,
                             Name = "Task 1",
                             Place = "Dhaka"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedTimestamp = 1669406826L,
+                            CreatedTimestamp = 1669403725,
                             Description = "This is Task 2.",
-                            ExpiryTimestamp = 1669125600L,
+                            ExpiryTimestamp = 1669125600,
                             Name = "Task 2",
                             Place = "Dhaka"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedTimestamp = 1669406826L,
+                            CreatedTimestamp = 1669403725,
                             Description = "This is Task 2.",
-                            ExpiryTimestamp = 1669071600L,
+                            ExpiryTimestamp = 1669071600,
                             Name = "Task 3",
                             Place = "Khulna"
                         });

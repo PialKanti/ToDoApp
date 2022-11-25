@@ -7,11 +7,11 @@
     <div class="card-body">
       <h6 class="card-subtitle mb-3 text-muted">
         <font-awesome-icon icon="fa-regular fa-calendar-days" />
-        {{ getFormattedDate(todoItem.expiryDateTime) }}
+        {{ getFormattedDate(todoItem.expiryTimestamp) }}
       </h6>
       <h6 class="mb-3 text-muted">
         <font-awesome-icon icon="fa-regular fa-clock" />
-        {{ getFormattedTime(todoItem.expiryDateTime) }}
+        {{ getFormattedTime(todoItem.expiryTimestamp) }}
       </h6>
       <p class="card-text">{{ todoItem.description }}</p>
       <p>
@@ -66,7 +66,7 @@ export default {
     this.dataTarget = "#" + this.modalId;
   },
   methods: {
-    getFormattedDate(dateTime) {
+    getFormattedDate(timestamp) {
       const monthNames = [
         "January",
         "February",
@@ -82,15 +82,15 @@ export default {
         "December",
       ];
 
-      var date = new Date(dateTime);
+      var date = new Date(timestamp);
       const day = date.getDate();
       const month = monthNames[date.getMonth()];
       const year = date.getFullYear();
 
       return (day + " " + month + ", " + year);
     },
-    getFormattedTime(dateTime) {
-      var date = new Date(dateTime);
+    getFormattedTime(timestamp) {
+      var date = new Date(timestamp);
       let hours = date.getHours() % 12;
       if (hours == 0) {
         hours = 12;

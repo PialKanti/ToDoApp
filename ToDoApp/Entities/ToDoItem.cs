@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ToDoApp.Entities
 {
@@ -8,9 +9,8 @@ namespace ToDoApp.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public string Place { get; set; }
-        [Required]
-        public DateTime CreatedDateTime { get; set; }
-        public DateTime ExpiryDateTime { get; set;}
+        public long CreatedTimestamp { get; set; }
+        public long ExpiryTimestamp { get; set;}
 
     }
 }

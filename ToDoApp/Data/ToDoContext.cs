@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToDoApp.Entities;
+using ToDoApp.Utils;
 
 namespace ToDoApp.Data
 {
@@ -19,8 +20,8 @@ namespace ToDoApp.Data
                         Name = "Task 1",
                         Description = "This is Task 1.",
                         Place = "Dhaka",
-                        CreatedDateTime = DateTime.Now,
-                        ExpiryDateTime = new DateTime(2022,11,22,14,0,0)
+                        CreatedTimestamp = CommonUtils.GetTimestamp(DateTime.UtcNow),
+                        ExpiryTimestamp = CommonUtils.GetTimestamp(new DateTime(2022, 11, 22, 14, 0, 0).ToUniversalTime()),
                     },
                     new ToDoItem
                     {
@@ -28,8 +29,8 @@ namespace ToDoApp.Data
                         Name = "Task 2",
                         Description = "This is Task 2.",
                         Place = "Dhaka",
-                        CreatedDateTime = DateTime.Now,
-                        ExpiryDateTime = new DateTime(2022, 11, 22, 20, 0, 0)
+                        CreatedTimestamp = CommonUtils.GetTimestamp(DateTime.UtcNow),
+                        ExpiryTimestamp = CommonUtils.GetTimestamp(new DateTime(2022, 11, 22, 20, 0, 0).ToUniversalTime())
                     },
                     new ToDoItem
                     {
@@ -37,8 +38,8 @@ namespace ToDoApp.Data
                         Name = "Task 3",
                         Description = "This is Task 2.",
                         Place = "Khulna",
-                        CreatedDateTime = DateTime.Now,
-                        ExpiryDateTime = new DateTime(2022, 11, 22, 5, 0, 0)
+                        CreatedTimestamp = CommonUtils.GetTimestamp(DateTime.UtcNow),
+                        ExpiryTimestamp = CommonUtils.GetTimestamp(new DateTime(2022, 11, 22, 5, 0, 0).ToUniversalTime())
                     });
         }
     }

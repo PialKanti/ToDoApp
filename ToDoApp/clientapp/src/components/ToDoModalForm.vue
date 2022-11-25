@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <label class="control-label" for="FormInputExpiryDate">Remind me at</label>
                             <input type="datetime-local" class="form-control" id="FormInputExpiryDate"
-                                placeholder="Enter remind date and time" v-model="expiryDateTime" />
+                                placeholder="Enter remind date and time" v-model="expiryTimestamp" />
                         </div>
                         <button type="submit" class="btn btn-primary">{{
                                 SubmitButtonText
@@ -56,7 +56,7 @@ export default {
             name: '',
             description: '',
             place: '',
-            expiryDateTime: '',
+            expiryTimestamp: '',
             closeButtonId: ''
         };
     },
@@ -68,26 +68,28 @@ export default {
             this.name = this.TodoItem.name;
             this.description = this.TodoItem.description;
             this.place = this.TodoItem.place;
-            this.expiryDateTime = this.toIsoString(this.TodoItem.expiryDateTime);
+            this.expiryTimestamp = this.toIsoString(this.TodoItem.expiryTimestamp);
         }
     },
     methods: {
         async submitForm() {
-            console.log(this.expiryDateTime);
+            console.log(this.expiryTimestamp);
             var data;
             if (this.SubmitButtonText == 'Create') {
                 data = JSON.stringify({
                     name: this.name,
                     description: this.description,
                     place: this.place,
-                    createdDateTime: new Date(),
-                    expiryDateTime: new Date(this.expiryDateTime)
+                    createdTimestamp: Date.now(),
+                    expiryTimestamp: new Date(this.expiryTimestamp).getTime()
                 });
+
+                console.log(data);
 
                 await fetch('api/todo', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json', 'charset': 'utf-8'
+                        'Content-Type': 'application/json'
                     },
                     body: data
                 });
@@ -98,8 +100,8 @@ export default {
                     name: this.name,
                     description: this.description,
                     place: this.place,
-                    createdDateTime: new Date(),
-                    expiryDateTime: new Date(this.expiryDateTime)
+                    createdTimestamp: Date.now(),
+                    expiryTimestamp: new Date(this.expiryTimestamp).getTime()
                 });
 
                 const requestUrl = 'api/todo/' + this.TodoItem.id;
@@ -119,8 +121,8 @@ export default {
         closeModal() {
             document.getElementById(this.closeButtonId).click();
         },
-        toIsoString(str) {
-            var date = new Date(str);
+        toIsoString(timestamp) {
+            var date = new Date(timestamp);
             return date.getFullYear() +
                 '-' + this.pad(date.getMonth() + 1) +
                 '-' + this.pad(date.getDate()) +
