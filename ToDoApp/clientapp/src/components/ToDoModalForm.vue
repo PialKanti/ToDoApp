@@ -56,6 +56,7 @@ export default {
             name: '',
             description: '',
             place: '',
+            isCompleted: false,
             expiryTimestamp: '',
             closeButtonId: ''
         };
@@ -68,6 +69,7 @@ export default {
             this.name = this.TodoItem.name;
             this.description = this.TodoItem.description;
             this.place = this.TodoItem.place;
+            this.isCompleted = this.TodoItem.isCompleted;
             this.expiryTimestamp = this.toIsoString(this.TodoItem.expiryTimestamp);
         }
     },
@@ -80,6 +82,7 @@ export default {
                     name: this.name,
                     description: this.description,
                     place: this.place,
+                    isCompleted: this.isCompleted,
                     createdTimestamp: Date.now(),
                     expiryTimestamp: new Date(this.expiryTimestamp).getTime()
                 });
@@ -100,6 +103,7 @@ export default {
                     name: this.name,
                     description: this.description,
                     place: this.place,
+                    isCompleted: this.isCompleted,
                     createdTimestamp: Date.now(),
                     expiryTimestamp: new Date(this.expiryTimestamp).getTime()
                 });
@@ -109,7 +113,7 @@ export default {
                 await fetch(requestUrl, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': 'application/json', 'charset': 'utf-8'
+                        'Content-Type': 'application/json'
                     },
                     body: data
                 });

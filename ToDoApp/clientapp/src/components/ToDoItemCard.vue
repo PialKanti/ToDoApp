@@ -20,9 +20,10 @@
       </p>
       <div class="row">
         <div class="col-md-4">
-          <button type="button" class="btn btn-light">
-            <font-awesome-icon icon="fa-regular fa-circle-check" />
-            Complete
+          <button type="button" class="btn btn-light" @click="makeComplete">
+            <font-awesome-icon icon="fa-solid fa-circle-check" v-if="isCompleted" />
+            <font-awesome-icon icon="fa-regular fa-circle-check" v-else />
+            {{ isCompleted ? "Completed" : "Complete" }}
           </button>
         </div>
         <div class="col-md-4">
@@ -55,7 +56,8 @@ export default {
   data() {
     return {
       dataTarget: '',
-      modalId: ''
+      modalId: '',
+      isCompleted: false
     };
   },
   props: {
@@ -64,6 +66,7 @@ export default {
   created() {
     this.modalId = "ToDoModalUpdateForm" + this.todoItem.id;
     this.dataTarget = "#" + this.modalId;
+    this.isCompleted = this.todoItem.isCompleted;
   },
   methods: {
     getFormattedDate(timestamp) {
@@ -105,6 +108,29 @@ export default {
         method: 'DELETE'
       });
       this.$emit('refresh-list');
+    },
+    async makeComplete() {
+      this.isCompleted = true;
+
+      const data = JSON.stringify({
+        id: this.todoItem.id,
+        name: this.todoItem.name,
+        description: this.todoItem.description,
+        place: this.todoItem.place,
+        isCompleted: this.isCompleted,
+        createdTimestamp: this.todoItem.createdTimestamp,
+        expiryTimestamp: this.todoItem.expiryTimestamp
+      });
+
+      const requestUrl = 'api/todo/' + this.todoItem.id;
+      console.log(requestUrl);
+      await fetch(requestUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: data
+      });
     }
   },
 };

@@ -9,12 +9,12 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
-import {faCalendarDays, faCheckCircle, faPenToSquare, faTrashCan, faPlusSquare, faClock} from '@fortawesome/free-regular-svg-icons'
+import { faLocationDot, faCheckCircle as faCheckCircleSolid } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarDays, faCheckCircle as faCheckCircleRegular, faPenToSquare, faTrashCan, faPlusSquare, faClock } from '@fortawesome/free-regular-svg-icons'
 
 /* add icons to the library */
-library.add(faLocationDot, faCalendarDays, faCheckCircle, faPenToSquare, faTrashCan, faPlusSquare, faClock)
+library.add(faLocationDot, faCalendarDays, faCheckCircleRegular, faCheckCircleSolid, faPenToSquare, faTrashCan, faPlusSquare, faClock)
 
 createApp(App)
-.component('font-awesome-icon', FontAwesomeIcon)
-.mount('#app')
+    .component('font-awesome-icon', FontAwesomeIcon)
+    .mount('#app')
