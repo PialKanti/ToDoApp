@@ -20,20 +20,20 @@
       </p>
       <div class="row">
         <div class="col-md-4">
-          <button type="button" class="btn btn-light" @click="makeComplete" :disabled="isCompleted">
+          <button type="button" class="btn btn-outline-primary" @click="makeComplete" :disabled="isCompleted">
             <font-awesome-icon icon="fa-solid fa-circle-check" v-if="isCompleted" />
             <font-awesome-icon icon="fa-regular fa-circle-check" v-else />
             {{ isCompleted ? "Completed" : "Complete" }}
           </button>
         </div>
         <div class="col-md-4">
-          <button type="button" class="btn btn-light" data-toggle="modal" :data-target="dataTarget">
+          <button type="button" class="btn btn-outline-info" data-toggle="modal" :data-target="dataTarget">
             <font-awesome-icon icon="fa-regular fa-pen-to-square" />
             Update
           </button>
         </div>
         <div class="col-md-4">
-          <button type="button" class="btn btn-light" @click="onDeleteButtonClicked">
+          <button type="button" class="btn btn-outline-danger" @click="onDeleteButtonClicked">
             <font-awesome-icon icon="fa-regular fa-trash-can" />
             Delete
           </button>
