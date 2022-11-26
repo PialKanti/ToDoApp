@@ -20,7 +20,7 @@
       </p>
       <div class="row">
         <div class="col-md-4">
-          <button type="button" class="btn btn-light" @click="makeComplete">
+          <button type="button" class="btn btn-light" @click="makeComplete" :disabled="isCompleted">
             <font-awesome-icon icon="fa-solid fa-circle-check" v-if="isCompleted" />
             <font-awesome-icon icon="fa-regular fa-circle-check" v-else />
             {{ isCompleted ? "Completed" : "Complete" }}
