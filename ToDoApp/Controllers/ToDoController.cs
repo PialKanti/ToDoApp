@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ToDoApp.Data;
 using ToDoApp.Entities;
+using ToDoApp.Enums;
 using ToDoApp.Repositories;
 
 namespace ToDoApp.Controllers
@@ -17,8 +18,14 @@ namespace ToDoApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ToDoItem>> Get()
+        public async Task<IEnumerable<ToDoItem>> Get([FromQuery] int type)
         {
+            ToDoItemType itemType = (ToDoItemType)type;
+            if (itemType != ToDoItemType.All)
+            {
+                return await _repository.GetAllByType(itemType);
+            }
+
             return await _repository.GetAll();
         }
 
