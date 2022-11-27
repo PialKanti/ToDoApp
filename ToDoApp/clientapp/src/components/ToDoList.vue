@@ -1,54 +1,31 @@
 <template>
-  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#ToDoModalCreateForm">
-    <font-awesome-icon icon="fa-regular fa-square-plus" />
-    Create event
-  </button>
-  <ToDoModalForm Title="Create event" Id="ToDoModalCreateForm" SubmitButtonText="Create"
-    @form-submission="onFormSubmission"></ToDoModalForm>
-  <div class="card-columns mt-5">
-    <ToDoItemCard v-for="(item, index) in toDoItems" :key="index" :todoItem="item" @refresh-list="onRefreshList" />
+  <div class="card-columns mt-5" v-if="ItemList.length">
+    <ToDoItemCard v-for="(item, index) in ItemList" :key="index" :todoItem="item" @refresh-list="onRefreshList" />
   </div>
+  <div v-else>
+    <p class="no-items">No upcoming todo events</p>
+  </div>
+
 </template>
 
 <script>
 import ToDoItemCard from "./ToDoItemCard.vue";
-import ToDoModalForm from "./ToDoModalForm.vue";
 
 export default {
   name: "ToDoList",
   components: {
-    ToDoItemCard,
-    ToDoModalForm
+    ToDoItemCard
   },
-  data() {
-    return {
-      toDoItems: [],
-    };
-  },
-  async created() {
-    this.onRefreshList();
-  },
-  methods: {
-    async fetchTodoList() {
-      const response = await fetch("api/todo");
-      const data = await response.json();
-      return data;
-    },
-    async onRefreshList() {
-      console.log("Refreshing List");
-      this.toDoItems = await this.fetchTodoList();
-      console.log(this.toDoItems);
-    },
-    onFormSubmission() {
-      this.onRefreshList();
-    }
-  },
+  props: {
+    ItemList: Array
+  }
 };
 </script>
-
 <style scoped>
-form-group {
-  text-align: left;
-  align-content: flex-start;
+.no-items {
+  text-align: center;
+  margin: 10px;
+  color: grey;
+  size: 15pt;
 }
 </style>
