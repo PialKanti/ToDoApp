@@ -9,6 +9,7 @@
     </ToDoModalForm>
     <ToDoEvent Type="upcoming" :ItemList="upcomingList" @refresh-list="onRefreshList"></ToDoEvent>
     <ToDoEvent Type="completed" :ItemList="completedList" @refresh-list="onRefreshList"></ToDoEvent>
+    <ToDoEvent Type="expired" :ItemList="expiredList" @refresh-list="onRefreshList"></ToDoEvent>
 </template>
 
 <script>
@@ -27,7 +28,8 @@ export default {
         return {
             upcomingList: [],
             completedList: [],
-            type: { Upcoming: "1", Completed: "2" },
+            expiredList: [],
+            type: { Upcoming: "1", Completed: "2", Expired: "3" },
             showUpcomingList: true
         };
     },
@@ -41,6 +43,7 @@ export default {
         async onRefreshList() {
             this.upcomingList = await this.fetchTodoList(this.type.Upcoming);
             this.completedList = await this.fetchTodoList(this.type.Completed);
+            this.expiredList = await this.fetchTodoList(this.type.Expired);
         },
         async fetchTodoList(todoType) {
             const requestUrl = "api/todo?type=" + todoType;

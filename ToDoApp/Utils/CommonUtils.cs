@@ -2,10 +2,11 @@
 {
     public class CommonUtils
     {
-        public static int GetTimestamp(DateTime dateTime)
+        public static long GetTimestamp(DateTime dateTime)
         {
-            var timeSpan = (dateTime - new DateTime(1970, 1, 1, 0, 0, 0));
-            return (int)timeSpan.TotalSeconds;
+            var timeSpan = (dateTime.Subtract(new DateTime(1970, 1, 1)));
+            return (long)timeSpan.TotalMilliseconds;
         }
+
     }
 }

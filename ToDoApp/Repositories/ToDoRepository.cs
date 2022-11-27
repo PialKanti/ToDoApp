@@ -2,6 +2,7 @@
 using ToDoApp.Data;
 using ToDoApp.Entities;
 using ToDoApp.Enums;
+using ToDoApp.Utils;
 
 namespace ToDoApp.Repositories
 {
@@ -56,10 +57,10 @@ namespace ToDoApp.Repositories
 
         public async Task<IEnumerable<ToDoItem>> GetAllByType(ToDoItemType type)
         {
-            
+            long currentTimestamp = CommonUtils.GetTimestamp(DateTime.UtcNow);
+
             if (type == ToDoItemType.Upcoming)
             {
-                int currentTimestamp = DateTime.UtcNow.Millisecond;
                 return await _dbContext.ToDoItems.Where(item=>item.ExpiryTimestamp > currentTimestamp && !item.IsCompleted).ToListAsync();
             }
             else if (type == ToDoItemType.Completed)
@@ -68,7 +69,6 @@ namespace ToDoApp.Repositories
             }
             else if(type == ToDoItemType.Expired)
             {
-                int currentTimestamp = DateTime.UtcNow.Millisecond;
                 return await _dbContext.ToDoItems.Where(item => currentTimestamp > item.ExpiryTimestamp && !item.IsCompleted).ToListAsync();
             }
 
