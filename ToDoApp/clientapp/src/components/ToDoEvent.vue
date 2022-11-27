@@ -4,11 +4,11 @@
             <div class="todo-type-text">
                 <font-awesome-icon icon="fa-regular fa-square-caret-down" v-if="showUpcomingList" />
                 <font-awesome-icon icon="fa-regular fa-square-caret-right" v-else />
-                {{ Type }}
+                {{ capitalizeFirstLetter(Type) }}
             </div>
         </h5>
     </button>
-    <ToDoList :Items="ItemList" v-show="showUpcomingList"></ToDoList>
+    <ToDoList :Type="Type" :Items="ItemList" v-show="showUpcomingList"></ToDoList>
 </template>
 
 <script>
@@ -31,6 +31,9 @@ export default {
     methods: {
         toggleListVisibility() {
             this.showUpcomingList = !this.showUpcomingList;
+        },
+        capitalizeFirstLetter(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
         }
     }
 };

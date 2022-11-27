@@ -8,6 +8,7 @@
         @form-submission="onFormSubmission">
     </ToDoModalForm>
     <ToDoEvent Type="upcoming" :ItemList="upcomingList"></ToDoEvent>
+    <ToDoEvent Type="completed" :ItemList="completedList"></ToDoEvent>
 </template>
 
 <script>
@@ -39,7 +40,6 @@ export default {
         },
         async onRefreshList() {
             this.upcomingList = await this.fetchTodoList(this.type.Upcoming);
-            console.log(this.upcomingList);
             this.completedList = await this.fetchTodoList(this.type.Completed);
         },
         async fetchTodoList(todoType) {
