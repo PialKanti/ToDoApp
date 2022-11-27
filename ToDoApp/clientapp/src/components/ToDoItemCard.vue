@@ -133,7 +133,8 @@ export default {
 
 <style scoped>
 .card {
-  max-width: 390px;
+  max-width: 360px;
+  border-radius: 20px;
 }
 
 .card-header {
@@ -141,6 +142,7 @@ export default {
 }
 
 .btn-blocks {
+  width: 100%;
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 15px;
@@ -152,10 +154,6 @@ export default {
   padding-right: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-radius: 0;
-}
-
-.btn-blocks {
-  width: 100%;
+  border-radius: 10px;
 }
 </style>
