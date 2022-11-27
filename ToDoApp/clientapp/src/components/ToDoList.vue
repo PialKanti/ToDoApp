@@ -1,9 +1,9 @@
 <template>
-  <div class="card-columns mt-5" v-if="ItemList.length">
-    <ToDoItemCard v-for="(item, index) in ItemList" :key="index" :todoItem="item" @refresh-list="onRefreshList" />
+  <div class="card-columns mt-5" v-if="Items.length">
+    <ToDoItemCard v-for="(item, index) in Items" :key="index" :todoItem="item" @refresh-list="onRefreshList" />
   </div>
   <div v-else>
-    <p class="no-items">No upcoming todo events</p>
+    <p class="no-items">No {{ Type }} todo events</p>
   </div>
 
 </template>
@@ -17,10 +17,12 @@ export default {
     ToDoItemCard
   },
   props: {
-    ItemList: Array
+    Items: Array,
+    Type: String
   }
 };
 </script>
+
 <style scoped>
 .no-items {
   text-align: center;
