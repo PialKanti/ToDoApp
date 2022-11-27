@@ -18,7 +18,7 @@
         {{ todoItem.place }}
       </p>
     </div>
-    <div class="btn-group btn-blocks" data-toggle="buttons">
+    <div class="btn-group btn-blocks">
       <button type="button" class="btn btn-sm btn-outline-primary" @click="makeComplete" v-if="!todoItem.isCompleted">
         <font-awesome-icon icon="fa-solid fa-circle-check" />
         Complete
@@ -154,7 +154,7 @@ export default {
   border-radius: 10px;
 }
 
-.btn:active {
-  border-style: outset;
+.btn:focus {
+  box-shadow: none;
 }
 </style>
