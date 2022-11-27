@@ -10,7 +10,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form @submit.prevent="submitForm">
+                    <form ref="todoForm" @submit.prevent="submitForm">
                         <div class="form-group">
                             <label class="control-label" for="FormInputName">Name</label>
                             <input type="text" class="form-control" id="FormInputName" placeholder="Enter event name"
@@ -75,7 +75,6 @@ export default {
     },
     methods: {
         async submitForm() {
-            console.log(this.expiryTimestamp);
             var data;
             if (this.SubmitButtonText == 'Create') {
                 data = JSON.stringify({
@@ -120,6 +119,7 @@ export default {
             }
 
             this.$emit('form-submission');
+            this.$refs.todoForm.reset();
             this.closeModal();
         },
         closeModal() {
