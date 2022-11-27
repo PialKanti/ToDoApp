@@ -24,4 +24,8 @@ export default {
   margin-top: 60px;
   margin-bottom: 60px;
 }
+
+.btn:focus {
+  box-shadow: none;
+}
 </style>

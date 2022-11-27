@@ -49,8 +49,4 @@ export default {
     font-size: 13pt;
     vertical-align: middle;
 }
-
-.btn:focus {
-    box-shadow: none;
-}
 </style>

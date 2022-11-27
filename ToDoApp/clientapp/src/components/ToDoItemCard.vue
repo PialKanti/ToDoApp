@@ -153,8 +153,4 @@ export default {
   padding-bottom: 5px;
   border-radius: 10px;
 }
-
-.btn:focus {
-  box-shadow: none;
-}
 </style>
