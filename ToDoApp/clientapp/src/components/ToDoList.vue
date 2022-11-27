@@ -1,6 +1,6 @@
 <template>
   <div class="card-columns mt-5" v-if="Items.length">
-    <ToDoItemCard v-for="(item, index) in Items" :key="index" :todoItem="item" @refresh-list="onRefreshList" />
+    <ToDoItemCard v-for="(item, index) in Items" :key="index" :todoItem="item" @refresh-list="$emit('refresh-list')" />
   </div>
   <div v-else>
     <p class="no-items">No {{ Type }} todo events</p>

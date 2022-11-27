@@ -59,7 +59,7 @@ namespace ToDoApp.Repositories
             if (type == ToDoItemType.Upcoming)
             {
                 int currentTimestamp = DateTime.UtcNow.Millisecond;
-                return await _dbContext.ToDoItems.Where(item=>item.ExpiryTimestamp > currentTimestamp).ToListAsync();
+                return await _dbContext.ToDoItems.Where(item=>item.ExpiryTimestamp > currentTimestamp && !item.IsCompleted).ToListAsync();
 ;
             }
             else if (type == ToDoItemType.Completed)

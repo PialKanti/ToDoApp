@@ -8,7 +8,7 @@
             </div>
         </h5>
     </button>
-    <ToDoList :Type="Type" :Items="ItemList" v-show="showUpcomingList"></ToDoList>
+    <ToDoList :Type="Type" :Items="ItemList" v-show="showUpcomingList" @refresh-list="$emit('refresh-list')"></ToDoList>
 </template>
 
 <script>

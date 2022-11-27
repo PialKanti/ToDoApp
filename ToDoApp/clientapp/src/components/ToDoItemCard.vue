@@ -131,6 +131,8 @@ export default {
         },
         body: data
       });
+
+      this.$emit('refresh-list');
     }
   },
 };

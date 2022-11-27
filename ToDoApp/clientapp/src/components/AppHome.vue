@@ -7,8 +7,8 @@
     <ToDoModalForm Title="Create event" Id="ToDoModalCreateForm" SubmitButtonText="Create"
         @form-submission="onFormSubmission">
     </ToDoModalForm>
-    <ToDoEvent Type="upcoming" :ItemList="upcomingList"></ToDoEvent>
-    <ToDoEvent Type="completed" :ItemList="completedList"></ToDoEvent>
+    <ToDoEvent Type="upcoming" :ItemList="upcomingList" @refresh-list="onRefreshList"></ToDoEvent>
+    <ToDoEvent Type="completed" :ItemList="completedList" @refresh-list="onRefreshList"></ToDoEvent>
 </template>
 
 <script>
