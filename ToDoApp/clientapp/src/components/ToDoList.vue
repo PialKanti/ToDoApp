@@ -3,7 +3,7 @@
     <ToDoItemCard v-for="(item, index) in Items" :key="index" :todoItem="item" @refresh-list="$emit('refresh-list')" />
   </div>
   <div v-else>
-    <p class="no-items">No {{ Type }} todo events</p>
+    <p class="text-muted no-items-text">No {{ Type }} todo events.</p>
   </div>
 
 </template>
@@ -24,10 +24,10 @@ export default {
 </script>
 
 <style scoped>
-.no-items {
+.no-items-text {
   text-align: center;
-  margin: 10px;
-  color: grey;
-  size: 15pt;
+  margin: 20px;
+  size: 16pt;
+  font-weight: 500;
 }
 </style>

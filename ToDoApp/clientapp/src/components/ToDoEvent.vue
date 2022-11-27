@@ -1,12 +1,10 @@
 <template>
-    <button type="button" class="todo-type mt-5" @click="toggleListVisibility">
-        <h5>
-            <div class="todo-type-text">
-                <font-awesome-icon icon="fa-regular fa-square-caret-down" v-if="showUpcomingList" />
-                <font-awesome-icon icon="fa-regular fa-square-caret-right" v-else />
-                {{ capitalizeFirstLetter(Type) }}
-            </div>
-        </h5>
+    <button type="button" class="btn btn-outline-dark btn-block todo-type mt-4" @click="toggleListVisibility">
+        <div class="todo-type-text">
+            <font-awesome-icon icon="fa-regular fa-square-caret-down" v-if="showUpcomingList" />
+            <font-awesome-icon icon="fa-regular fa-square-caret-right" v-else />
+            {{ capitalizeFirstLetter(Type) }}
+        </div>
     </button>
     <ToDoList :Type="Type" :Items="ItemList" v-show="showUpcomingList" @refresh-list="$emit('refresh-list')"></ToDoList>
 </template>
@@ -41,18 +39,18 @@ export default {
 
 <style scoped>
 .todo-type {
-    border: thin solid;
-    border-color: black;
     border-radius: 10px;
     width: 100%;
     height: 40px;
-    vertical-align: center;
     text-align: left;
-    background-color: transparent;
 }
 
 .todo-type-text {
-    margin-left: 10px;
-    margin-top: 6px;
+    font-size: 13pt;
+    vertical-align: middle;
+}
+
+.btn:focus {
+    box-shadow: none;
 }
 </style>
