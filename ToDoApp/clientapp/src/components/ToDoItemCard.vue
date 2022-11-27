@@ -49,8 +49,7 @@ export default {
   data() {
     return {
       dataTarget: '',
-      modalId: '',
-      isCompleted: false
+      modalId: ''
     };
   },
   props: {
@@ -59,7 +58,6 @@ export default {
   created() {
     this.modalId = "ToDoModalUpdateForm" + this.todoItem.id;
     this.dataTarget = "#" + this.modalId;
-    this.isCompleted = this.todoItem.isCompleted;
   },
   methods: {
     getFormattedDate(timestamp) {
@@ -103,14 +101,12 @@ export default {
       this.$emit('refresh-list');
     },
     async makeComplete() {
-      this.isCompleted = true;
-
       const data = JSON.stringify({
         id: this.todoItem.id,
         name: this.todoItem.name,
         description: this.todoItem.description,
         place: this.todoItem.place,
-        isCompleted: this.isCompleted,
+        isCompleted: true,
         createdTimestamp: this.todoItem.createdTimestamp,
         expiryTimestamp: this.todoItem.expiryTimestamp
       });
@@ -134,6 +130,7 @@ export default {
 <style scoped>
 .card {
   max-width: 360px;
+  min-width: 300px;
   border-radius: 20px;
 }
 
@@ -155,5 +152,9 @@ export default {
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 10px;
+}
+
+.btn:active {
+  border-style: outset;
 }
 </style>
