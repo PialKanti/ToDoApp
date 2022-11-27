@@ -1,12 +1,14 @@
 ﻿<template>
-    <h1>{{ title }}</h1>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">{{ Title }}</a>
+    </nav>
 </template>
 
 <script>
 export default {
     name: 'AppHeader',
     props: {
-        title: String
+        Title: String
     }
 }
 </script>

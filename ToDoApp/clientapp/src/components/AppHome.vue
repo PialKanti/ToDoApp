@@ -1,5 +1,5 @@
 <template>
-    <AppHeader title="ToDo App" />
+    <AppHeader Title="ToDo App" />
     <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#ToDoModalCreateForm">
         <font-awesome-icon icon="fa-regular fa-square-plus" />
         Create event
