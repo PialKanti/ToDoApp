@@ -56,15 +56,20 @@ namespace ToDoApp.Repositories
 
         public async Task<IEnumerable<ToDoItem>> GetAllByType(ToDoItemType type)
         {
+            
             if (type == ToDoItemType.Upcoming)
             {
                 int currentTimestamp = DateTime.UtcNow.Millisecond;
                 return await _dbContext.ToDoItems.Where(item=>item.ExpiryTimestamp > currentTimestamp && !item.IsCompleted).ToListAsync();
-;
             }
             else if (type == ToDoItemType.Completed)
             {
                 return await _dbContext.ToDoItems.Where(item => item.IsCompleted).ToListAsync();
+            }
+            else if(type == ToDoItemType.Expired)
+            {
+                int currentTimestamp = DateTime.UtcNow.Millisecond;
+                return await _dbContext.ToDoItems.Where(item => currentTimestamp > item.ExpiryTimestamp && !item.IsCompleted).ToListAsync();
             }
 
             return new List<ToDoItem>();

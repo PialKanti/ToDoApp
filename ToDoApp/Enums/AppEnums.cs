@@ -1,4 +1,4 @@
 ﻿namespace ToDoApp.Enums
 {
-    public enum ToDoItemType { All, Upcoming, Completed }
+    public enum ToDoItemType { All, Upcoming, Completed, Expired }
 }
