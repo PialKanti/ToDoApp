@@ -5,7 +5,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ToDoModalFormLabel">{{ Title }}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" :id="closeButtonId">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" :id="closeButtonId"
+                        @click="closeClick">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -125,6 +126,9 @@ export default {
         },
         closeModal() {
             document.getElementById(this.closeButtonId).click();
+        },
+        closeClick() {
+            this.resetForm();
         },
         resetForm() {
             this.name = '';
