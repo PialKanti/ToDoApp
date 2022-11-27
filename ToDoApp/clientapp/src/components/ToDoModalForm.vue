@@ -121,9 +121,16 @@ export default {
             this.$emit('form-submission');
             this.$refs.todoForm.reset();
             this.closeModal();
+            this.resetForm();
         },
         closeModal() {
             document.getElementById(this.closeButtonId).click();
+        },
+        resetForm() {
+            this.name = '';
+            this.description = '';
+            this.place = '';
+            this.expiryTimestamp = '';
         },
         toIsoString(timestamp) {
             var date = new Date(timestamp);

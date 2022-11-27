@@ -1,8 +1,7 @@
 <template>
-  {{ ToDoItem }}
   <div class="card">
     <div class="card-header">
-      <h5>{{ todoItem.name }}</h5>
+      <b>{{ todoItem.name }}</b>
     </div>
     <div class="card-body">
       <h6 class="card-subtitle mb-3 text-muted">
@@ -18,30 +17,24 @@
         <font-awesome-icon icon="fa-solid fa-location-dot" />
         {{ todoItem.place }}
       </p>
-      <div class="row">
-        <div class="col-md-4">
-          <button type="button" class="btn btn-outline-primary" @click="makeComplete" :disabled="isCompleted">
-            <font-awesome-icon icon="fa-solid fa-circle-check" v-if="isCompleted" />
-            <font-awesome-icon icon="fa-regular fa-circle-check" v-else />
-            {{ isCompleted ? "Completed" : "Complete" }}
-          </button>
-        </div>
-        <div class="col-md-4">
-          <button type="button" class="btn btn-outline-info" data-toggle="modal" :data-target="dataTarget">
-            <font-awesome-icon icon="fa-regular fa-pen-to-square" />
-            Update
-          </button>
-        </div>
-        <div class="col-md-4">
-          <button type="button" class="btn btn-outline-danger" @click="onDeleteButtonClicked">
-            <font-awesome-icon icon="fa-regular fa-trash-can" />
-            Delete
-          </button>
-        </div>
-      </div>
-      <ToDoModalForm Title="Update event" :Id="modalId" :TodoItem="todoItem" SubmitButtonText="Update"
-        @form-submission="$emit('refresh-list')"></ToDoModalForm>
     </div>
+    <div class="btn-group btn-blocks" data-toggle="buttons">
+      <button type="button" class="btn btn-sm btn-outline-primary" @click="makeComplete" v-if="!todoItem.isCompleted">
+        <font-awesome-icon icon="fa-solid fa-circle-check" />
+        Complete
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-info" data-toggle="modal" :data-target="dataTarget"
+        v-if="!todoItem.isCompleted">
+        <font-awesome-icon icon="fa-regular fa-pen-to-square" />
+        Update
+      </button>
+      <button type="button" class="btn btn-sm btn-outline-danger" @click="onDeleteButtonClicked">
+        <font-awesome-icon icon="fa-regular fa-trash-can" />
+        Delete
+      </button>
+    </div>
+    <ToDoModalForm Title="Update event" :Id="modalId" :TodoItem="todoItem" SubmitButtonText="Update"
+      @form-submission="$emit('refresh-list')"></ToDoModalForm>
   </div>
 </template>
 
@@ -140,6 +133,29 @@ export default {
 
 <style scoped>
 .card {
-  min-width: 20rem;
+  max-width: 390px;
+}
+
+.card-header {
+  font-size: 14pt;
+}
+
+.btn-blocks {
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.btn {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 0;
+}
+
+.btn-blocks {
+  width: 100%;
 }
 </style>
