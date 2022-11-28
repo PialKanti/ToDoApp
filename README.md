@@ -5,7 +5,7 @@ ToDoApp is a web-based **VueJS-powered** application that is using **ASP.NET Cor
 - Create, update or delete a todo event
 - Complete an event with a single button click
 - Show events in three separate categories - upcoming, completed, and expired
-- Automatically move an expired event to Expired category
+- Automatically move an expired event to the Expired category
 
 ## Tech
 
@@ -35,3 +35,23 @@ Otherwise, install Vue CLI by below command
     npm install -g @vue/cli
 
 First, open ***ToDoApp.sln*** file with [Visual Studio](https://visualstudio.microsoft.com/). Run the project by clicking the **F5** button.
+
+After a successful run, a command prompt will be opened. 
+![enter image description here](https://i.ibb.co/Z6YMVMc/Screenshot-2022-11-28-171738.png)
+
+Next, open ***clientapp*** Folder from this location 
+
+> ToDoApp\ToDoApp\clientapp
+
+Open a command prompt in this location and install the necessary dependencies via the below command:
+
+    npm install
+
+This will install all the necessary dependencies and devDependencies from ***package.json*** file.
+After that, start the client application
+
+    npm run serve
+
+## Preview of Application
+
+![Home page](https://i.ibb.co/xS587V1/Screenshot-2022-11-28-175425.png)
