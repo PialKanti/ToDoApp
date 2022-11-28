@@ -37,7 +37,7 @@ Otherwise, install Vue CLI by below command
 First, open ***ToDoApp.sln*** file with [Visual Studio](https://visualstudio.microsoft.com/). Run the project by clicking the **F5** button.
 
 After a successful run, a command prompt will be opened. 
-![enter image description here](https://i.ibb.co/Z6YMVMc/Screenshot-2022-11-28-171738.png)
+![cmd](https://i.ibb.co/Z6YMVMc/Screenshot-2022-11-28-171738.png)
 
 Next, open ***clientapp*** Folder from this location 
 
