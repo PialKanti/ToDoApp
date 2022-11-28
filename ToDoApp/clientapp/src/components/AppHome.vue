@@ -1,9 +1,11 @@
 <template>
-    <AppHeader Title="ToDo App" />
-    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#ToDoModalCreateForm">
-        <font-awesome-icon icon="fa-regular fa-square-plus" />
-        Create event
-    </button>
+    <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-outline-success btn-create" data-toggle="modal"
+            data-target="#ToDoModalCreateForm">
+            <font-awesome-icon icon="fa-regular fa-square-plus" />
+            &nbsp;Create event
+        </button>
+    </div>
     <ToDoModalForm Title="Create event" Id="ToDoModalCreateForm" SubmitButtonText="Create"
         @form-submission="onFormSubmission">
     </ToDoModalForm>
@@ -13,14 +15,12 @@
 </template>
 
 <script>
-import AppHeader from "./AppHeader.vue";
 import ToDoModalForm from "./ToDoModalForm.vue"
 import ToDoEvent from "./ToDoEvent.vue";
 
 export default {
     name: "AppHome",
     components: {
-        AppHeader,
         ToDoModalForm,
         ToDoEvent
     },
@@ -54,3 +54,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.btn-create {
+    border-radius: 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 25%;
+}
+</style>
