@@ -83,7 +83,6 @@ export default {
                     description: this.description,
                     place: this.place,
                     isCompleted: this.isCompleted,
-                    createdTimestamp: Date.now(),
                     expiryTimestamp: new Date(this.expiryTimestamp).getTime()
                 });
 

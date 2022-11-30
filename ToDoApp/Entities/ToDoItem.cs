@@ -7,10 +7,13 @@ namespace ToDoApp.Entities
     {
         [Required]
         public string Name { get; set; }
+        [MaxLength(200)]
         public string Description { get; set; }
+        [MaxLength(200)]
         public string Place { get; set; }
         public bool IsCompleted { get; set; }
         public long CreatedTimestamp { get; set; }
-        public long ExpiryTimestamp { get; set;}
+        [Required]
+        public long? ExpiryTimestamp { get; set;}
     }
 }

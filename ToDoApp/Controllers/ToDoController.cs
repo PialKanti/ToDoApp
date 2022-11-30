@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using ToDoApp.Data;
+using ToDoApp.Dtos;
 using ToDoApp.Entities;
 using ToDoApp.Enums;
 using ToDoApp.Repositories;
+using ToDoApp.Utils;
 
 namespace ToDoApp.Controllers
 {
@@ -11,10 +14,12 @@ namespace ToDoApp.Controllers
     public class ToDoController : ControllerBase
     {
         private readonly IToDoRepository _repository;
+        private readonly IMapper _mapper;
 
-        public ToDoController(ToDoContext dbContext)
+        public ToDoController(ToDoContext dbContext, IMapper mapper)
         {
             _repository = new ToDoRepository(dbContext);
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -30,8 +35,10 @@ namespace ToDoApp.Controllers
         }
 
         [HttpPost]
-        public async Task Create(ToDoItem item)
+        public async Task Create(ToDoItemCreateDto dtoModel)
         {
+            ToDoItem item = _mapper.Map<ToDoItem>(dtoModel);
+            item.CreatedTimestamp = CommonUtils.GetTimestamp(DateTime.UtcNow);
             await _repository.Insert(item);
         }
 
