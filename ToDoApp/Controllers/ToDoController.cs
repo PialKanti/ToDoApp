@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using ToDoApp.Data;
 using ToDoApp.Dtos;
 using ToDoApp.Entities;
@@ -43,16 +44,17 @@ namespace ToDoApp.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, ToDoItem item)
+        public async Task<HttpResponseMessage> Update(int id, ToDoItemUpdateDto dtoModel)
         {
-            if (id != item.Id)
+            if (id != dtoModel.Id)
             {
-                return BadRequest();
+                return new HttpResponseMessage(HttpStatusCode.BadRequest);
             }
 
+            ToDoItem item = _mapper.Map<ToDoItem>(dtoModel);
             await _repository.Update(item);
 
-            return NoContent();
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
         [HttpDelete("{id}")]

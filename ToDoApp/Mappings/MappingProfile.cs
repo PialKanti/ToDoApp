@@ -9,6 +9,7 @@ namespace ToDoApp.Mappings
         public MappingProfile()
         {
             CreateMap<ToDoItemCreateDto, ToDoItem>();
+            CreateMap<ToDoItemUpdateDto, ToDoItem>();
         }
     }
 }
