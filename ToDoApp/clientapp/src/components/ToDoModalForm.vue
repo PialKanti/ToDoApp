@@ -14,23 +14,38 @@
                     <form ref="todoForm" @submit.prevent="submitForm">
                         <div class="form-group">
                             <label class="control-label" for="FormInputName">Name</label>
-                            <input type="text" class="form-control" id="FormInputName" placeholder="Enter event name"
-                                v-model="name" />
+                            <input type="text" class="form-control" :class="{ 'is-invalid': errors.name.show }"
+                                id="FormInputName" placeholder="Enter event name" v-model="name" @input="onNameInput" />
+                            <small class="text-danger" v-if="errors.name.show">
+                                {{ errors.name.message }}
+                            </small>
                         </div>
                         <div class="form-group">
                             <label for="FormInputDescription">Description</label>
-                            <textarea class="form-control" id="FormInputDescription" rows="3"
-                                placeholder="Enter event description" v-model="description"></textarea>
+                            <textarea class="form-control" :class="{ 'is-invalid': errors.description.show }"
+                                id="FormInputDescription" rows="3" placeholder="Enter event description"
+                                v-model="description"></textarea>
+                            <small class="text-danger" v-if="errors.description.show">
+                                {{ errors.description.message }}
+                            </small>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="FormInputPlace">Place</label>
-                            <input type="text" class="form-control" id="FormInputPlace" placeholder="Enter event place"
-                                v-model="place" />
+                            <input type="text" class="form-control" :class="{ 'is-invalid': errors.place.show }"
+                                id="FormInputPlace" placeholder="Enter event place" v-model="place" />
+                            <small class="text-danger" v-if="errors.place.show">
+                                {{ errors.place.message }}
+                            </small>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="FormInputExpiryDate">Remind me at</label>
-                            <input type="datetime-local" class="form-control" id="FormInputExpiryDate"
-                                placeholder="Enter remind date and time" v-model="expiryTimestamp" />
+                            <input type="datetime-local" class="form-control"
+                                :class="{ 'is-invalid': errors.expiryTimestamp.show }" id="FormInputExpiryDate"
+                                placeholder="Enter remind date and time" v-model="expiryTimestamp"
+                                @input="onexpiryTimestampInput" />
+                            <small class="text-danger" v-if="errors.expiryTimestamp.show">
+                                {{ errors.expiryTimestamp.message }}
+                            </small>
                         </div>
                         <button type="submit" class="btn btn-primary">{{
                                 SubmitButtonText
@@ -43,7 +58,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'ToDoModalForm',
     props: {
@@ -59,7 +73,25 @@ export default {
             place: '',
             isCompleted: false,
             expiryTimestamp: '',
-            closeButtonId: ''
+            closeButtonId: '',
+            errors: {
+                name: {
+                    show: false,
+                    message: ''
+                },
+                description: {
+                    show: false,
+                    message: ''
+                },
+                place: {
+                    show: false,
+                    message: ''
+                },
+                expiryTimestamp: {
+                    show: false,
+                    message: ''
+                }
+            }
         };
     },
     beforeMount() {
@@ -76,6 +108,10 @@ export default {
     },
     methods: {
         async submitForm() {
+            if (!this.validateFormData()) {
+                return;
+            }
+
             var data;
             if (this.SubmitButtonText == 'Create') {
                 data = JSON.stringify({
@@ -121,6 +157,19 @@ export default {
             this.closeModal();
             this.resetForm();
         },
+        validateFormData() {
+            if (!this.name) {
+                this.errors.name.show = true;
+                this.errors.name.message = 'Name is required';
+                return false;
+            }
+            if (!this.expiryTimestamp) {
+                this.errors.expiryTimestamp.show = true;
+                this.errors.expiryTimestamp.message = 'Reminder date and time is required';
+                return false;
+            }
+            return true;
+        },
         closeModal() {
             document.getElementById(this.closeButtonId).click();
         },
@@ -132,6 +181,24 @@ export default {
             this.description = '';
             this.place = '';
             this.expiryTimestamp = '';
+            this.errors = {
+                name: {
+                    show: false,
+                    message: ''
+                },
+                description: {
+                    show: false,
+                    message: ''
+                },
+                place: {
+                    show: false,
+                    message: ''
+                },
+                expiryTimestamp: {
+                    show: false,
+                    message: ''
+                }
+            }
         },
         toIsoString(timestamp) {
             var date = new Date(timestamp);
@@ -143,6 +210,18 @@ export default {
         },
         pad(num) {
             return (num < 10 ? '0' : '') + num;
+        },
+        onNameInput() {
+            if (this.name) {
+                this.errors.name.show = false;
+                this.errors.name.message = '';
+            }
+        },
+        onexpiryTimestampInput() {
+            if (this.expiryTimestamp) {
+                this.errors.expiryTimestamp.show = false;
+                this.errors.expiryTimestamp.message = '';
+            }
         }
     }
 }
