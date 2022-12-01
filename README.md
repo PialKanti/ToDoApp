@@ -6,6 +6,7 @@ ToDoApp is a web-based **VueJS-powered** application that is using **ASP.NET Cor
 - Complete an event with a single button click
 - Show events in three separate categories - upcoming, completed, and expired
 - Automatically move an expired event to the Expired category
+- Form validation from both client and server-side
 
 ## Tech
 
