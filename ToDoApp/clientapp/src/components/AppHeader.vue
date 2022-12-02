@@ -20,11 +20,11 @@ export default {
             searchText: ''
         };
     },
+    emits: ['search-items'],
     methods: {
         search() {
             this.$emit('search-items', this.searchText);
         }
-    },
-    emits: ['search-items']
+    }
 }
 </script>

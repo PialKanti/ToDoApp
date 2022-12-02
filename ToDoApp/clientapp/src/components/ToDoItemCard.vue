@@ -59,6 +59,7 @@ export default {
     this.modalId = "ToDoModalUpdateForm" + this.todoItem.id;
     this.dataTarget = "#" + this.modalId;
   },
+  emits: ['refresh-list'],
   methods: {
     getFormattedDate(timestamp) {
       const monthNames = [

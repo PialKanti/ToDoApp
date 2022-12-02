@@ -19,7 +19,8 @@ export default {
   props: {
     Items: Array,
     Type: String
-  }
+  },
+  emits: ['refresh-list']
 };
 </script>
 

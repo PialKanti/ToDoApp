@@ -26,6 +26,7 @@ export default {
         Type: String,
         ItemList: Array
     },
+    emits: ['refresh-list'],
     methods: {
         toggleListVisibility() {
             this.showUpcomingList = !this.showUpcomingList;

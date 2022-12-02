@@ -106,6 +106,7 @@ export default {
             this.expiryTimestamp = this.toIsoString(this.TodoItem.expiryTimestamp);
         }
     },
+    emits: ['form-submission'],
     methods: {
         async submitForm() {
             if (!this.validateFormData()) {
