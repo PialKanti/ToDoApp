@@ -122,8 +122,6 @@ export default {
                     expiryTimestamp: new Date(this.expiryTimestamp).getTime()
                 });
 
-                console.log(data);
-
                 await fetch('api/todo', {
                     method: 'POST',
                     headers: {

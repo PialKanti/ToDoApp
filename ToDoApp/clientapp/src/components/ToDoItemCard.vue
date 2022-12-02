@@ -17,6 +17,8 @@
         <font-awesome-icon icon="fa-solid fa-location-dot" />
         {{ todoItem.place }}
       </p>
+      <small class="font-italic text-muted">Created at {{ getFormattedTime(todoItem.createdTimestamp)
+      }}</small>
     </div>
     <div class="btn-group btn-blocks">
       <button type="button" class="btn btn-sm btn-outline-primary" @click="makeComplete" v-if="!todoItem.isCompleted">
@@ -144,7 +146,6 @@ export default {
   width: 100%;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 15px;
   padding-bottom: 15px;
 }
 
