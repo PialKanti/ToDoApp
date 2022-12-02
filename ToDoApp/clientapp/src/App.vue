@@ -1,18 +1,13 @@
 <template>
-  <AppHeader Title="ToDo App" />
-  <div class="container">
-    <AppHome />
-  </div>
+  <AppHome />
 </template>
 
 <script>
-import AppHeader from "./components/AppHeader.vue";
 import AppHome from "./components/AppHome.vue"
 
 export default {
   name: "App",
   components: {
-    AppHeader,
     AppHome
   },
 };
