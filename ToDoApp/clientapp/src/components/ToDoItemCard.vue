@@ -91,8 +91,9 @@ export default {
         hours = 12;
       }
       const minutes = (date.getMinutes() == 0) ? "00" : date.getMinutes();
+      const seconds = (date.getSeconds() == 0) ? "00" : date.getSeconds();
       const am_pm = date.getHours() >= 12 ? "PM" : "AM";
-      return (hours + ":" + minutes + " " + am_pm);
+      return `${hours}:${minutes}:${seconds} ${am_pm}`;
     },
     async onDeleteButtonClicked() {
       const url = 'api/todo/' + this.todoItem.id;
