@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card shadow bg-white rounded">
     <div class="card-header">
       <b>{{ todoItem.name }}</b>
     </div>
@@ -135,7 +135,7 @@ export default {
 .card {
   max-width: 360px;
   min-width: 300px;
-  border-radius: 20px;
+  margin-bottom: 20px;
 }
 
 .card-header {
