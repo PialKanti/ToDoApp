@@ -1,4 +1,5 @@
 ﻿using ToDoApp.Enums;
+using ToDoApp.Models;
 
 namespace ToDoApp.Repositories
 {
@@ -9,6 +10,6 @@ namespace ToDoApp.Repositories
         Task Update(T entityToUpdate);
         Task<int> Delete(int id);
         Task<IEnumerable<T>> GetAll();
-        Task<IEnumerable<T>> GetAllByType(ToDoItemType type);
+        Task<IEnumerable<T>> SearchByCriteria(SearchCriteria criteria);
     }
 }

@@ -2,6 +2,7 @@
 using ToDoApp.Data;
 using ToDoApp.Entities;
 using ToDoApp.Enums;
+using ToDoApp.Models;
 using ToDoApp.Utils;
 
 namespace ToDoApp.Repositories
@@ -55,24 +56,36 @@ namespace ToDoApp.Repositories
             return await _dbContext.ToDoItems.ToListAsync();
         }
 
-        public async Task<IEnumerable<ToDoItem>> GetAllByType(ToDoItemType type)
+        public async Task<IEnumerable<ToDoItem>> SearchByCriteria(SearchCriteria criteria)
         {
             long currentTimestamp = CommonUtils.GetTimestamp(DateTime.UtcNow);
 
-            if (type == ToDoItemType.Upcoming)
+            ToDoItemType type = (ToDoItemType)criteria.Type;
+            var query = Enumerable.Empty<ToDoItem>().AsQueryable();
+
+            if(type == ToDoItemType.All)
             {
-                return await _dbContext.ToDoItems.Where(item=>item.ExpiryTimestamp > currentTimestamp && !item.IsCompleted).ToListAsync();
+                return await GetAll();
+            }
+            else if (type == ToDoItemType.Upcoming)
+            {
+                query = _dbContext.ToDoItems.Where(item=>item.ExpiryTimestamp > currentTimestamp && !item.IsCompleted);
             }
             else if (type == ToDoItemType.Completed)
             {
-                return await _dbContext.ToDoItems.Where(item => item.IsCompleted).ToListAsync();
+                query = _dbContext.ToDoItems.Where(item => item.IsCompleted);
             }
             else if(type == ToDoItemType.Expired)
             {
-                return await _dbContext.ToDoItems.Where(item => currentTimestamp > item.ExpiryTimestamp && !item.IsCompleted).ToListAsync();
+                query = _dbContext.ToDoItems.Where(item => currentTimestamp > item.ExpiryTimestamp && !item.IsCompleted);
             }
 
-            return new List<ToDoItem>();
+            if (!string.IsNullOrEmpty(criteria.Name))
+            {
+                query = query.Where(item => item.Name.Contains(criteria.Name));
+            }
+
+            return await query.ToListAsync();
         }
     }
 }

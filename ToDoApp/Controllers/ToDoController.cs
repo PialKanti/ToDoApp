@@ -5,6 +5,7 @@ using ToDoApp.Data;
 using ToDoApp.Dtos;
 using ToDoApp.Entities;
 using ToDoApp.Enums;
+using ToDoApp.Models;
 using ToDoApp.Repositories;
 using ToDoApp.Utils;
 
@@ -24,15 +25,14 @@ namespace ToDoApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ToDoItem>> Get([FromQuery] int type)
+        public async Task<IEnumerable<ToDoItem>> Get([FromQuery] SearchCriteria searchCriteria)
         {
-            ToDoItemType itemType = (ToDoItemType)type;
-            if (itemType != ToDoItemType.All)
+            if(searchCriteria == null)
             {
-                return await _repository.GetAllByType(itemType);
+                return new List<ToDoItem>();
             }
-
-            return await _repository.GetAll();
+            
+            return await _repository.SearchByCriteria(searchCriteria);
         }
 
         [HttpPost]
