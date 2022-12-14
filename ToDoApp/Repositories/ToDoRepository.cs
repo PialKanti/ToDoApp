@@ -30,20 +30,27 @@ namespace ToDoApp.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<int> Delete(int id)
+        public async Task<ToDoItem> Delete(int id)
         {
-            Delete(await Get(id));
-            return await _dbContext.SaveChangesAsync();
+            ToDoItem entityToDelete = await Get(id);
+            if (entityToDelete == null)
+            {
+                return entityToDelete;
+            }
+
+            ToDoItem deletedEntity = Delete(entityToDelete);
+            await _dbContext.SaveChangesAsync();
+            return deletedEntity;
         }
 
-        private void Delete(ToDoItem entityToDelete)
+        private ToDoItem Delete(ToDoItem entityToDelete)
         {
             if (_dbContext.Entry(entityToDelete).State == EntityState.Detached)
             {
                 _dbContext.ToDoItems.Attach(entityToDelete);
             }
-
-            _dbContext.ToDoItems.Remove(entityToDelete);
+            
+            return _dbContext.ToDoItems.Remove(entityToDelete).Entity;
         }
 
         public async Task<ToDoItem> Get(int id)

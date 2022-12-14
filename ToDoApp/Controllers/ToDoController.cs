@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
-using Azure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.DotNet.Scaffolding.Shared.Messaging;
-using System.Net;
-using System.Threading.Tasks;
 using ToDoApp.Data;
 using ToDoApp.Dtos;
 using ToDoApp.Entities;
-using ToDoApp.Enums;
 using ToDoApp.Models;
 using ToDoApp.Repositories;
 using ToDoApp.Utils;
@@ -28,48 +23,56 @@ namespace ToDoApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ToDoItem>> Get([FromQuery] SearchCriteria searchCriteria)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<ToDoItem>>> Get([FromQuery] SearchCriteria searchCriteria)
         {
-            if(searchCriteria == null)
-            {
-                return new List<ToDoItem>();
-            }
-            
-            return await _repository.SearchByCriteria(searchCriteria);
+            return Ok(await _repository.SearchByCriteria(searchCriteria));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ToDoItemCreateDto dtoModel)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> Create([FromBody]ToDoItemCreateDto dtoModel)
         {
             ToDoItem item = _mapper.Map<ToDoItem>(dtoModel);
+
             item.CreatedTimestamp = CommonUtils.GetTimestamp(DateTime.UtcNow);
             if(item.CreatedTimestamp <= 0)
             {
-                return new ObjectResult(new { StatusCode = HttpStatusCode.InternalServerError, Message = "CreatedTimestamp must be greater than zero" });
+                return StatusCode(StatusCodes.Status500InternalServerError, "CreatedTimestamp must be greater than zero");
             }
-            await _repository.Insert(item);
-
-            return Ok();
+            
+            return Ok(await _repository.Insert(item));
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update(int id, ToDoItemUpdateDto dtoModel)
         {
-            if (id != dtoModel.Id)
+            if (id < 0 && id != dtoModel.Id)
             {
-                return new BadRequestResult();
+                return BadRequest();
             }
 
             ToDoItem item = _mapper.Map<ToDoItem>(dtoModel);
             await _repository.Update(item);
 
-            return Ok();
+            return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task Delete(int id)
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(int id)
         {
-            await _repository.Delete(id);
+            ToDoItem item = await _repository.Delete(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }
